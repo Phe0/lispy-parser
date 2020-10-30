@@ -62,6 +62,9 @@ class LispyTransformer(InlineTransformer):
     def name(self, token):
         return Symbol(token)
 
+    def symbol(self, token):
+        return Symbol(token)
+
     def quoted(self, token):
         return [Symbol('quote'), token]
 
@@ -80,13 +83,22 @@ class LispyTransformer(InlineTransformer):
 # transformer = LispyTransformer()
 
 # exprs = [
-#     "(cmd 1)\n(cmd 2)"
+#     "(cmd 1)\n(cmd 2)",
+#     """
+#         ;; Fatorial
+#         (define fat (lambda (n) 
+#             (if (<= n 1)
+#                 1
+#                 (* n (fat (- n 1))))))
+
+#         (print (fat 5))
+#         """
 # ]
 
 # for src in exprs:
 #     print(src)
 #     tree = grammar.parse(src)
-#     print(tree)
+#     print(tree.pretty())
 #     result = transformer.transform(tree)
 #     print(result)
 #     print('-' * 40)
